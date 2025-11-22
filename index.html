@@ -7,7 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     
     <script>
         tailwind.config = {
@@ -19,14 +19,14 @@
                     },
                     colors: {
                         surface: '#ffffff',
-                        surfaceAlt: '#f8fafc',
-                        primary: '#2563eb', // Royal Blue
-                        secondary: '#0f172a', // Navy Slate (Text)
-                        accent: '#f59e0b',  // Engineering Orange
+                        surfaceAlt: '#f1f5f9',
+                        primary: '#0ea5e9', // Sky 500 - High vis
+                        secondary: '#0f172a', // Slate 900
+                        accent: '#f59e0b',  // Amber 500
                         muted: '#64748b'    // Slate 500
                     },
                     backgroundImage: {
-                        'grid-pattern': "linear-gradient(to right, #e2e8f0 1px, transparent 1px), linear-gradient(to bottom, #e2e8f0 1px, transparent 1px)",
+                        'grid-pattern': "linear-gradient(to right, #cbd5e1 1px, transparent 1px), linear-gradient(to bottom, #cbd5e1 1px, transparent 1px)",
                     }
                 }
             }
@@ -40,17 +40,16 @@
             overflow-x: hidden;
         }
         
-        /* Professional Light UI Elements */
+        /* UI Elements */
         .glass-nav {
-            background: rgba(255, 255, 255, 0.85);
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(12px);
             border-bottom: 1px solid #e2e8f0;
         }
 
         .bg-grid {
             background-size: 40px 40px;
-            mask-image: linear-gradient(to bottom, transparent, black, transparent);
-            -webkit-mask-image: linear-gradient(to bottom, transparent 5%, black 40%, black 80%, transparent 95%);
+            opacity: 0.4;
         }
         
         /* Simulation Container */
@@ -62,7 +61,7 @@
             height: 100%;
             z-index: 0;
             overflow: hidden;
-            background: #f0f9ff; /* Very light blue tint */
+            background: #f8fafc; 
         }
         
         canvas {
@@ -95,13 +94,12 @@
 </head>
 <body class="antialiased selection:bg-primary selection:text-white">
 
-    <!-- Light Professional Navbar -->
+    <!-- Navbar -->
     <header class="fixed w-full top-0 z-50 glass-nav transition-all duration-300" id="navbar">
         <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
             <a href="#" class="flex items-center gap-3 group">
-                <!-- Logo Icon -->
-                <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center text-white font-bold text-xl shadow-md group-hover:shadow-lg transition-all">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                <div class="w-10 h-10 bg-secondary rounded-lg flex items-center justify-center text-white font-bold text-xl shadow-md">
+                    C
                 </div>
                 <div class="flex flex-col">
                     <span class="font-bold text-secondary tracking-tight leading-none text-lg">CFD MANIA</span>
@@ -113,18 +111,19 @@
                 <a href="#simulation" class="hover:text-primary transition-colors">Simulation</a>
                 <a href="#industry" class="hover:text-primary transition-colors">Industry</a>
                 <a href="#courses" class="hover:text-primary transition-colors">Academy</a>
+                <a href="#roadmap" class="hover:text-primary transition-colors">Roadmap</a>
                 <a href="#founder" class="hover:text-primary transition-colors">Founder</a>
             </nav>
 
             <div class="hidden md:flex items-center gap-4">
-                <a href="#contact" class="px-5 py-2.5 bg-secondary text-white font-bold text-sm rounded-lg hover:bg-primary transition-colors shadow-lg shadow-blue-500/20">
+                <a href="#contact" class="px-5 py-2.5 bg-primary text-white font-bold text-sm rounded-lg hover:bg-blue-600 transition-colors shadow-lg shadow-blue-200">
                     Start Project
                 </a>
             </div>
             
             <!-- Mobile Toggle -->
             <button id="mobile-menu-btn" class="md:hidden text-secondary p-2">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" /></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" /></svg>
             </button>
         </div>
         <!-- Mobile Menu -->
@@ -140,86 +139,95 @@
 
     <main>
         <!-- Hero Section -->
-        <section id="simulation" class="relative h-screen w-full flex items-center justify-center pt-20 bg-surfaceAlt">
+        <section id="simulation" class="relative min-h-screen w-full flex items-center justify-center pt-24 pb-12 bg-surfaceAlt overflow-hidden">
             
             <!-- The Simulation Canvas -->
             <div id="sim-container">
-                <div class="absolute inset-0 bg-grid-pattern bg-grid opacity-30"></div>
+                <div class="absolute inset-0 bg-grid-pattern bg-grid"></div>
                 <canvas id="sim-canvas"></canvas>
-                <!-- Gradient Overlay for Readability -->
-                <div class="absolute inset-0 bg-gradient-to-b from-white/0 via-white/0 to-surfaceAlt"></div>
+                <!-- Fade to white at bottom -->
+                <div class="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-surfaceAlt to-transparent"></div>
             </div>
 
             <!-- Hero Content -->
             <div class="relative z-10 max-w-7xl mx-auto px-6 w-full grid lg:grid-cols-2 gap-12 items-center">
                 <div class="fade-in-up">
-                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-blue-200 bg-blue-50 mb-6 shadow-sm">
-                        <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
-                        <span class="text-primary font-mono text-xs font-bold tracking-wider">V2.4 SOLVER READY</span>
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-slate-200 bg-white mb-6 shadow-sm">
+                        <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                        <span class="text-slate-600 font-mono text-xs font-bold tracking-wider">SOLVER: CONVERGED</span>
                     </div>
                     <h1 class="text-5xl md:text-7xl font-extrabold text-secondary mb-6 tracking-tight">
                         Visualize the <br>
-                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-400">Invisible Flow.</span>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-600">Invisible Flow.</span>
                     </h1>
-                    <p class="text-lg text-muted mb-8 max-w-lg leading-relaxed font-medium">
-                        Master Computational Fluid Dynamics. From Formula 1 aerodynamics to aerospace propulsion, learn to simulate reality.
+                    <p class="text-lg text-slate-600 mb-8 max-w-lg leading-relaxed font-medium">
+                        Master Computational Fluid Dynamics. From Formula 1 aerodynamics to aerospace propulsion, simulate reality with precision.
                     </p>
                     
-                    <!-- Control Panel (Light Theme) -->
-                    <div class="bg-white/80 backdrop-blur-md border border-gray-200 p-1.5 rounded-xl inline-flex gap-1 shadow-xl shadow-slate-200/50">
-                        <button onclick="setSimMode('airfoil')" class="sim-btn active px-5 py-3 rounded-lg text-sm font-bold transition-all bg-primary text-white shadow-md">
+                    <!-- Control Panel -->
+                    <div class="bg-white/90 backdrop-blur-sm border border-slate-200 p-2 rounded-xl inline-flex flex-wrap gap-2 shadow-xl">
+                        <button onclick="setSimMode('airfoil')" class="sim-btn active px-5 py-2.5 rounded-lg text-sm font-bold transition-all bg-secondary text-white shadow-md border border-transparent">
                             Aerospace
                         </button>
-                        <button onclick="setSimMode('car')" class="sim-btn px-5 py-3 rounded-lg text-sm font-bold text-muted hover:text-secondary hover:bg-gray-100 transition-all">
+                        <button onclick="setSimMode('car')" class="sim-btn px-5 py-2.5 rounded-lg text-sm font-bold text-slate-500 hover:text-secondary hover:bg-slate-50 border border-transparent transition-all">
                             Motorsport
                         </button>
-                        <button onclick="setSimMode('cylinder')" class="sim-btn px-5 py-3 rounded-lg text-sm font-bold text-muted hover:text-secondary hover:bg-gray-100 transition-all">
+                        <button onclick="setSimMode('cylinder')" class="sim-btn px-5 py-2.5 rounded-lg text-sm font-bold text-slate-500 hover:text-secondary hover:bg-slate-50 border border-transparent transition-all">
                             Physics
                         </button>
                     </div>
-                    <p class="mt-4 font-mono text-xs text-muted flex items-center gap-2">
-                        <svg class="w-4 h-4 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" /></svg>
-                        Interactive: Move cursor to create turbulence
+                    <p class="mt-4 font-mono text-xs text-slate-500 flex items-center gap-2">
+                        <svg class="w-4 h-4 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" /></svg>
+                        Move cursor to disrupt flow field
                     </p>
                 </div>
 
-                <!-- Data Card (Light Theme) -->
-                <div class="hidden lg:block fade-in-up delay-200 justify-self-end">
-                    <div class="w-72 bg-white border border-gray-100 rounded-2xl p-6 shadow-2xl shadow-slate-200/50 font-mono text-xs">
-                        <div class="flex justify-between border-b border-gray-100 pb-3 mb-4 text-muted font-bold tracking-wider">
-                            <span>SIM_TELEMETRY</span>
-                            <span class="text-green-500 flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-green-500"></span> LIVE</span>
+                <!-- Active Telemetry Card (Visible on Mobile now) -->
+                <div class="fade-in-up delay-200 w-full lg:justify-self-end lg:w-auto">
+                    <div class="w-full lg:w-80 bg-white border border-slate-200 rounded-2xl p-6 shadow-2xl shadow-slate-300/50 font-mono text-xs relative overflow-hidden">
+                        <!-- Decoration -->
+                        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary to-accent"></div>
+                        
+                        <div class="flex justify-between border-b border-slate-100 pb-3 mb-4 text-slate-500 font-bold tracking-wider">
+                            <span>LIVE_TELEMETRY</span>
+                            <span class="text-green-600 flex items-center gap-1 bg-green-50 px-2 py-0.5 rounded-full"><span class="w-1.5 h-1.5 rounded-full bg-green-600 animate-pulse"></span> ONLINE</span>
                         </div>
                         <div class="space-y-4">
-                            <div class="flex justify-between items-center">
-                                <span class="text-muted">Reynolds No.</span>
-                                <span class="text-secondary font-bold bg-slate-100 px-2 py-0.5 rounded">2.4e6</span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span class="text-muted">Mach No.</span>
-                                <span class="text-secondary font-bold bg-slate-100 px-2 py-0.5 rounded">0.35</span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span class="text-muted">Solver</span>
-                                <span class="text-primary font-bold">RANS k-ω SST</span>
-                            </div>
-                            
-                            <div class="mt-2">
-                                <div class="flex justify-between text-[10px] text-muted mb-1">
-                                    <span>CONVERGENCE</span>
-                                    <span>98%</span>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <span class="text-slate-400 block mb-1">Reynolds No.</span>
+                                    <span id="telemetry-reynolds" class="text-secondary font-bold text-lg">2.4e6</span>
                                 </div>
-                                <div class="h-1.5 bg-slate-100 rounded-full overflow-hidden">
-                                    <div class="h-full bg-primary w-[98%] rounded-full"></div>
+                                <div>
+                                    <span class="text-slate-400 block mb-1">Mach No.</span>
+                                    <span id="telemetry-mach" class="text-secondary font-bold text-lg">0.35</span>
                                 </div>
                             </div>
                             
-                            <div class="h-24 bg-slate-50 rounded border border-slate-100 relative overflow-hidden p-2 flex items-end justify-between gap-1">
-                                <div class="w-full bg-blue-200/50 rounded-sm h-[30%]"></div>
-                                <div class="w-full bg-blue-300/50 rounded-sm h-[50%]"></div>
-                                <div class="w-full bg-blue-400/50 rounded-sm h-[40%]"></div>
-                                <div class="w-full bg-primary/50 rounded-sm h-[70%]"></div>
-                                <div class="w-full bg-primary rounded-sm h-[60%]"></div>
+                            <div class="bg-slate-50 p-3 rounded-lg border border-slate-100">
+                                <div class="flex justify-between items-center mb-1">
+                                    <span class="text-slate-500">Solver Status</span>
+                                    <span class="text-primary font-bold">Running...</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-slate-500">Iterations</span>
+                                    <span id="telemetry-iterations" class="text-secondary font-bold">15,042</span>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="flex justify-between items-center mb-1">
+                                    <span class="text-slate-400">Residuals</span>
+                                    <span id="telemetry-residuals" class="text-accent font-bold">1.0e-3</span>
+                                </div>
+                                <!-- Dynamic Graph -->
+                                <div class="h-24 bg-slate-50 rounded border border-slate-100 relative overflow-hidden p-2 flex items-end justify-between gap-1" id="telemetry-graph">
+                                    <div class="telemetry-bar w-full bg-blue-200 rounded-sm h-[30%] transition-all duration-300"></div>
+                                    <div class="telemetry-bar w-full bg-blue-300 rounded-sm h-[50%] transition-all duration-300"></div>
+                                    <div class="telemetry-bar w-full bg-blue-400 rounded-sm h-[40%] transition-all duration-300"></div>
+                                    <div class="telemetry-bar w-full bg-primary rounded-sm h-[70%] transition-all duration-300"></div>
+                                    <div class="telemetry-bar w-full bg-secondary rounded-sm h-[60%] transition-all duration-300"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -242,9 +250,9 @@
 
                 <div class="grid md:grid-cols-2 gap-8">
                     <!-- Aerospace Card -->
-                    <div class="group relative h-80 rounded-2xl overflow-hidden shadow-lg shadow-slate-200/50 card-hover">
-                        <img src="https://placehold.co/800x600/e2e8f0/3b82f6?text=Wing+Vortices" alt="Aerospace" class="absolute inset-0 w-full h-full object-cover transition duration-700 group-hover:scale-105">
-                        <div class="absolute inset-0 bg-gradient-to-t from-secondary/90 via-secondary/20 to-transparent"></div>
+                    <div class="group relative h-80 rounded-2xl overflow-hidden shadow-lg shadow-slate-200/50 card-hover bg-slate-900">
+                        <img src="https://placehold.co/800x600/1e293b/3b82f6?text=Wing+Vortices" alt="Aerospace" class="absolute inset-0 w-full h-full object-cover transition duration-700 group-hover:scale-105 opacity-90">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
                         <div class="absolute bottom-0 left-0 p-8 z-20">
                             <div class="w-10 h-10 bg-blue-500 rounded-lg flex items-center justify-center text-white mb-4 shadow-lg">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" /></svg>
@@ -255,9 +263,9 @@
                     </div>
 
                     <!-- Automotive Card -->
-                    <div class="group relative h-80 rounded-2xl overflow-hidden shadow-lg shadow-slate-200/50 card-hover">
-                        <img src="https://placehold.co/800x600/e2e8f0/f59e0b?text=F1+Wake+Turbulence" alt="Automotive" class="absolute inset-0 w-full h-full object-cover transition duration-700 group-hover:scale-105">
-                        <div class="absolute inset-0 bg-gradient-to-t from-secondary/90 via-secondary/20 to-transparent"></div>
+                    <div class="group relative h-80 rounded-2xl overflow-hidden shadow-lg shadow-slate-200/50 card-hover bg-slate-900">
+                        <img src="https://placehold.co/800x600/1e293b/f59e0b?text=F1+Wake+Turbulence" alt="Automotive" class="absolute inset-0 w-full h-full object-cover transition duration-700 group-hover:scale-105 opacity-90">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
                         <div class="absolute bottom-0 left-0 p-8 z-20">
                             <div class="w-10 h-10 bg-accent rounded-lg flex items-center justify-center text-white mb-4 shadow-lg">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
@@ -275,12 +283,12 @@
             <div class="max-w-7xl mx-auto px-6">
                 <div class="text-center mb-16">
                     <span class="bg-blue-100 text-primary font-bold text-xs px-3 py-1 rounded-full tracking-wider uppercase">Academy</span>
-                    <h2 class="text-3xl font-bold text-secondary mt-4">Structured Learning Paths</h2>
-                    <p class="text-muted mt-2">From beginner concepts to advanced industrial application.</p>
+                    <h2 class="text-3xl font-bold text-secondary mt-4">Comprehensive CFD Curriculum</h2>
+                    <p class="text-slate-600 mt-2">Expert-led modules ranging from fundamental physics to specialized industrial applications.</p>
                 </div>
 
-                <div class="grid md:grid-cols-3 gap-8">
-                    <!-- Course 1 -->
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Course 1: Fundamentals -->
                     <div class="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm hover:shadow-xl transition duration-300 group">
                         <div class="h-40 bg-blue-50 rounded-xl mb-6 flex items-center justify-center relative overflow-hidden group-hover:bg-blue-100 transition">
                             <span class="text-5xl font-bold text-blue-200 group-hover:text-blue-300 transition">01</span>
@@ -290,11 +298,11 @@
                             <span class="text-xs font-bold text-green-600">BEGINNER</span>
                         </div>
                         <h3 class="text-xl font-bold text-secondary mb-3">CFD Fundamentals</h3>
-                        <p class="text-muted text-sm mb-6 leading-relaxed">Understanding Navier-Stokes equations, mesh independence, and turbulence modeling basics.</p>
+                        <p class="text-slate-500 text-sm mb-6 leading-relaxed">Understanding Navier-Stokes equations, mesh independence, and turbulence modeling basics.</p>
                         <button class="w-full py-2.5 bg-surfaceAlt border border-gray-200 rounded-lg text-sm text-secondary font-semibold group-hover:bg-secondary group-hover:text-white transition-all">Start Module</button>
                     </div>
 
-                    <!-- Course 2 -->
+                    <!-- Course 2: Ansys -->
                     <div class="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm hover:shadow-xl transition duration-300 group">
                         <div class="h-40 bg-orange-50 rounded-xl mb-6 flex items-center justify-center relative overflow-hidden group-hover:bg-orange-100 transition">
                             <span class="text-5xl font-bold text-orange-200 group-hover:text-orange-300 transition">02</span>
@@ -304,23 +312,123 @@
                             <span class="text-xs font-bold text-accent">INTERMEDIATE</span>
                         </div>
                         <h3 class="text-xl font-bold text-secondary mb-3">Ansys Fluent Mastery</h3>
-                        <p class="text-muted text-sm mb-6 leading-relaxed">Multi-phase flows, dynamic meshing strategies, and conjugate heat transfer simulations.</p>
+                        <p class="text-slate-500 text-sm mb-6 leading-relaxed">Multi-phase flows, dynamic meshing strategies, and conjugate heat transfer simulations.</p>
                         <button class="w-full py-2.5 bg-surfaceAlt border border-gray-200 rounded-lg text-sm text-secondary font-semibold group-hover:bg-secondary group-hover:text-white transition-all">Start Module</button>
                     </div>
 
-                    <!-- Course 3 -->
+                    <!-- Course 3: OpenFOAM -->
                     <div class="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm hover:shadow-xl transition duration-300 group">
-                        <div class="h-40 bg-slate-50 rounded-xl mb-6 flex items-center justify-center relative overflow-hidden group-hover:bg-slate-100 transition">
-                            <span class="text-5xl font-bold text-slate-200 group-hover:text-slate-300 transition">03</span>
+                        <div class="h-40 bg-slate-100 rounded-xl mb-6 flex items-center justify-center relative overflow-hidden group-hover:bg-slate-200 transition">
+                            <span class="text-5xl font-bold text-slate-300 group-hover:text-slate-400 transition">03</span>
                         </div>
                         <div class="flex items-center gap-2 mb-3">
                             <span class="w-2 h-2 bg-red-500 rounded-full"></span>
                             <span class="text-xs font-bold text-red-500">ADVANCED</span>
                         </div>
                         <h3 class="text-xl font-bold text-secondary mb-3">OpenFOAM & Scripting</h3>
-                        <p class="text-muted text-sm mb-6 leading-relaxed">Custom solvers, Python automation, and parallel processing on HPC clusters.</p>
+                        <p class="text-slate-500 text-sm mb-6 leading-relaxed">Custom solvers, Python automation, and parallel processing on HPC clusters.</p>
                         <button class="w-full py-2.5 bg-surfaceAlt border border-gray-200 rounded-lg text-sm text-secondary font-semibold group-hover:bg-secondary group-hover:text-white transition-all">Start Module</button>
                     </div>
+
+                    <!-- Course 4: Hypersonics -->
+                    <div class="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm hover:shadow-xl transition duration-300 group">
+                        <div class="h-40 bg-indigo-50 rounded-xl mb-6 flex items-center justify-center relative overflow-hidden group-hover:bg-indigo-100 transition">
+                            <span class="text-5xl font-bold text-indigo-200 group-hover:text-indigo-300 transition">04</span>
+                        </div>
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="w-2 h-2 bg-red-500 rounded-full"></span>
+                            <span class="text-xs font-bold text-red-500">ADVANCED</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-secondary mb-3">Hypersonic Aerodynamics</h3>
+                        <p class="text-slate-500 text-sm mb-6 leading-relaxed">Compressible flow physics, shockwave interactions, and thermal protection systems for re-entry vehicles.</p>
+                        <button class="w-full py-2.5 bg-surfaceAlt border border-gray-200 rounded-lg text-sm text-secondary font-semibold group-hover:bg-secondary group-hover:text-white transition-all">Start Module</button>
+                    </div>
+
+                    <!-- Course 5: Battery Thermal -->
+                    <div class="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm hover:shadow-xl transition duration-300 group">
+                        <div class="h-40 bg-emerald-50 rounded-xl mb-6 flex items-center justify-center relative overflow-hidden group-hover:bg-emerald-100 transition">
+                            <span class="text-5xl font-bold text-emerald-200 group-hover:text-emerald-300 transition">05</span>
+                        </div>
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="w-2 h-2 bg-accent rounded-full"></span>
+                            <span class="text-xs font-bold text-accent">INTERMEDIATE</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-secondary mb-3">EV Battery Thermal Mgmt.</h3>
+                        <p class="text-slate-500 text-sm mb-6 leading-relaxed">Designing cooling systems for Lithium-Ion packs. Conjugate heat transfer and liquid cooling optimization.</p>
+                        <button class="w-full py-2.5 bg-surfaceAlt border border-gray-200 rounded-lg text-sm text-secondary font-semibold group-hover:bg-secondary group-hover:text-white transition-all">Start Module</button>
+                    </div>
+
+                    <!-- Course 6: Turbomachinery -->
+                    <div class="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm hover:shadow-xl transition duration-300 group">
+                        <div class="h-40 bg-cyan-50 rounded-xl mb-6 flex items-center justify-center relative overflow-hidden group-hover:bg-cyan-100 transition">
+                            <span class="text-5xl font-bold text-cyan-200 group-hover:text-cyan-300 transition">06</span>
+                        </div>
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="w-2 h-2 bg-red-500 rounded-full"></span>
+                            <span class="text-xs font-bold text-red-500">ADVANCED</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-secondary mb-3">Turbomachinery Design</h3>
+                        <p class="text-slate-500 text-sm mb-6 leading-relaxed">Rotating reference frames (MRF), sliding mesh techniques for pumps, compressors, and gas turbines.</p>
+                        <button class="w-full py-2.5 bg-surfaceAlt border border-gray-200 rounded-lg text-sm text-secondary font-semibold group-hover:bg-secondary group-hover:text-white transition-all">Start Module</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Learning Path Roadmap -->
+        <section id="roadmap" class="py-24 bg-white relative overflow-hidden">
+            <div class="max-w-7xl mx-auto px-6 relative z-10">
+                <div class="text-center mb-16">
+                    <span class="bg-blue-100 text-primary font-bold text-xs px-3 py-1 rounded-full tracking-wider uppercase">Career Roadmap</span>
+                    <h2 class="text-3xl font-bold text-secondary mt-4">Your Journey to CFD Expert</h2>
+                </div>
+                
+                <div class="relative">
+                    <!-- Connecting Line -->
+                    <div class="hidden md:block absolute top-1/2 left-0 w-full h-1 bg-slate-100 -translate-y-1/2 z-0"></div>
+                    
+                    <div class="grid md:grid-cols-4 gap-8 relative z-10">
+                        <!-- Step 1 -->
+                        <div class="bg-white p-6 rounded-xl border border-slate-100 shadow-lg text-center">
+                            <div class="w-12 h-12 bg-blue-500 text-white rounded-full flex items-center justify-center mx-auto mb-4 font-bold text-lg shadow-lg shadow-blue-500/30">1</div>
+                            <h3 class="font-bold text-secondary mb-2">The Basics</h3>
+                            <p class="text-xs text-slate-500">Fluid Mechanics, Thermodynamics, and basic PDE math.</p>
+                        </div>
+                        <!-- Step 2 -->
+                        <div class="bg-white p-6 rounded-xl border border-slate-100 shadow-lg text-center">
+                            <div class="w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center mx-auto mb-4 font-bold text-lg shadow-lg shadow-primary/30">2</div>
+                            <h3 class="font-bold text-secondary mb-2">RANS Modeling</h3>
+                            <p class="text-xs text-slate-500">Steady-state simulations using Ansys Fluent or Star-CCM+.</p>
+                        </div>
+                        <!-- Step 3 -->
+                        <div class="bg-white p-6 rounded-xl border border-slate-100 shadow-lg text-center">
+                            <div class="w-12 h-12 bg-accent text-white rounded-full flex items-center justify-center mx-auto mb-4 font-bold text-lg shadow-lg shadow-accent/30">3</div>
+                            <h3 class="font-bold text-secondary mb-2">Automation</h3>
+                            <p class="text-xs text-slate-500">Python scripting, Linux shell, and OpenFOAM customization.</p>
+                        </div>
+                        <!-- Step 4 -->
+                        <div class="bg-white p-6 rounded-xl border border-slate-100 shadow-lg text-center">
+                            <div class="w-12 h-12 bg-secondary text-white rounded-full flex items-center justify-center mx-auto mb-4 font-bold text-lg shadow-lg shadow-secondary/30">4</div>
+                            <h3 class="font-bold text-secondary mb-2">Industry Pro</h3>
+                            <p class="text-xs text-slate-500">Complex multiphysics, LES/DES, and high-performance computing.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Software Stack -->
+        <section class="py-16 bg-slate-50 border-y border-slate-200">
+            <div class="max-w-7xl mx-auto px-6 text-center">
+                <p class="text-slate-400 font-mono text-xs uppercase tracking-widest mb-8">Tech Stack You Will Master</p>
+                <div class="flex flex-wrap justify-center gap-12 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
+                    <!-- Simple Text Representations for Logos -->
+                    <span class="text-2xl font-bold text-slate-700 font-sans">Ansys</span>
+                    <span class="text-2xl font-bold text-slate-700 font-sans">OpenFOAM</span>
+                    <span class="text-2xl font-bold text-slate-700 font-sans">Python</span>
+                    <span class="text-2xl font-bold text-slate-700 font-sans">ParaView</span>
+                    <span class="text-2xl font-bold text-slate-700 font-sans">Linux</span>
+                    <span class="text-2xl font-bold text-slate-700 font-sans">MATLAB</span>
                 </div>
             </div>
         </section>
@@ -336,7 +444,7 @@
                     <div class="text-center md:text-left">
                         <h3 class="text-3xl font-bold text-secondary mb-2">Reddy Rahul Saddala</h3>
                         <p class="text-primary font-bold text-sm mb-6">CFD Engineer | Aerodynamics Specialist</p>
-                        <blockquote class="text-muted italic mb-8 text-lg">
+                        <blockquote class="text-slate-500 italic mb-8 text-lg">
                             "CFD isn't just about colorful pictures. It's about understanding the physics that govern our world. My goal is to bring industrial-grade simulation knowledge to the next generation of engineers."
                         </blockquote>
                         <div class="flex justify-center md:justify-start gap-4">
@@ -354,13 +462,13 @@
         <footer class="border-t border-gray-200 bg-white py-12">
             <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
                 <div class="flex items-center gap-3">
-                    <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white font-bold text-sm shadow-sm">C</div>
+                    <div class="w-8 h-8 bg-secondary rounded-lg flex items-center justify-center text-white font-bold text-sm shadow-sm">C</div>
                     <span class="font-bold text-secondary">CFD MANIA</span>
                 </div>
-                <div class="text-muted text-sm">
+                <div class="text-slate-500 text-sm">
                     &copy; 2024 CFD Mania. Engineered for Excellence.
                 </div>
-                <div class="flex gap-6 text-sm font-medium text-muted">
+                <div class="flex gap-6 text-sm font-medium text-slate-500">
                     <a href="#" class="hover:text-primary transition">Privacy</a>
                     <a href="#" class="hover:text-primary transition">Terms</a>
                     <a href="#" class="hover:text-primary transition">Support</a>
@@ -369,23 +477,23 @@
         </footer>
     </main>
 
-    <!-- Professional CFD Simulation Logic (Adjusted for Light Theme) -->
+    <!-- Simulation & Telemetry Script -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const canvas = document.getElementById('sim-canvas');
             const ctx = canvas.getContext('2d');
             let particles = [];
-            const particleCount = 600; 
+            const particleCount = 700; 
             let width, height;
             let simMode = 'airfoil'; 
 
             let mouse = { x: -999, y: -999, radius: 150 };
 
-            // Light Theme Colors
+            // High Contrast Colors for Light Theme
             const modes = {
-                airfoil: { color: 'rgba(37, 99, 235, 0.8)', speedMod: 1.3, geometry: drawAirfoil }, // Blue
-                car: { color: 'rgba(245, 158, 11, 0.8)', speedMod: 1.6, geometry: drawCar }, // Orange
-                cylinder: { color: 'rgba(100, 116, 139, 0.5)', speedMod: 1.0, geometry: drawCylinder } // Slate
+                airfoil: { color: 'rgba(37, 99, 235, 0.7)', speedMod: 1.3, geometry: drawAirfoil }, // Bright Blue
+                car: { color: 'rgba(234, 88, 12, 0.7)', speedMod: 1.6, geometry: drawCar }, // Vivid Orange
+                cylinder: { color: 'rgba(71, 85, 105, 0.6)', speedMod: 1.0, geometry: drawCylinder } // Dark Slate
             };
 
             window.setSimMode = function(mode) {
@@ -396,18 +504,18 @@
                 });
                 
                 document.querySelectorAll('.sim-btn').forEach(btn => {
-                    btn.classList.remove('bg-primary', 'text-white', 'active');
-                    btn.classList.add('text-muted', 'hover:text-secondary', 'hover:bg-gray-100');
+                    btn.classList.remove('bg-secondary', 'text-white', 'active');
+                    btn.classList.add('text-slate-500', 'hover:text-secondary', 'hover:bg-slate-50');
                     
                     if(mode === 'car' && btn.innerText.includes('Motorsport')) {
-                        btn.classList.add('bg-primary', 'text-white', 'active');
-                        btn.classList.remove('text-muted', 'hover:text-secondary', 'hover:bg-gray-100');
+                        btn.classList.add('bg-secondary', 'text-white', 'active');
+                        btn.classList.remove('text-slate-500', 'hover:text-secondary', 'hover:bg-slate-50');
                     } else if (mode === 'airfoil' && btn.innerText.includes('Aerospace')) {
-                        btn.classList.add('bg-primary', 'text-white', 'active');
-                        btn.classList.remove('text-muted', 'hover:text-secondary', 'hover:bg-gray-100');
+                        btn.classList.add('bg-secondary', 'text-white', 'active');
+                        btn.classList.remove('text-slate-500', 'hover:text-secondary', 'hover:bg-slate-50');
                     } else if (mode === 'cylinder' && btn.innerText.includes('Physics')) {
-                        btn.classList.add('bg-primary', 'text-white', 'active');
-                        btn.classList.remove('text-muted', 'hover:text-secondary', 'hover:bg-gray-100');
+                        btn.classList.add('bg-secondary', 'text-white', 'active');
+                        btn.classList.remove('text-slate-500', 'hover:text-secondary', 'hover:bg-slate-50');
                     }
                 });
             };
@@ -445,7 +553,6 @@
                     const cx = width / 2;
                     const cy = height / 2;
 
-                    // Physics Logic
                     if (simMode === 'cylinder') {
                         const dx = this.x - cx;
                         const dy = this.y - cy;
@@ -517,11 +624,11 @@
                 }
             }
 
-            // Geometry Drawers (Dark Shapes for Contrast)
+            // Geometry Drawers (Dark for contrast against light bg)
             function drawCylinder() {
                 ctx.beginPath();
                 ctx.arc(width/2, height/2, 50, 0, Math.PI * 2);
-                ctx.fillStyle = '#334155';
+                ctx.fillStyle = '#1e293b'; // Dark Slate
                 ctx.fill();
             }
 
@@ -532,7 +639,7 @@
                 ctx.moveTo(-80, 10);
                 ctx.quadraticCurveTo(0, -50, 80, 10);
                 ctx.quadraticCurveTo(0, 0, -80, 10);
-                ctx.fillStyle = '#334155';
+                ctx.fillStyle = '#1e293b';
                 ctx.fill();
                 ctx.restore();
             }
@@ -540,7 +647,7 @@
             function drawCar() {
                 ctx.save();
                 ctx.translate(width/2, height/2 + 60);
-                ctx.fillStyle = '#334155';
+                ctx.fillStyle = '#1e293b';
                 ctx.beginPath();
                 ctx.moveTo(-110, 20); 
                 ctx.lineTo(-90, 5);
@@ -559,8 +666,8 @@
             }
 
             function animate() {
-                // Clear with slight transparency for trail effect
-                ctx.fillStyle = 'rgba(240, 249, 255, 0.2)'; 
+                // Fade effect (Light trail)
+                ctx.fillStyle = 'rgba(248, 250, 252, 0.2)'; // Match bg color
                 ctx.fillRect(0, 0, width, height);
 
                 modes[simMode].geometry();
@@ -571,6 +678,50 @@
                 });
 
                 requestAnimationFrame(animate);
+            }
+
+            // --- TELEMETRY UPDATER ---
+            // Initial values
+            let currentIter = 15042;
+            
+            function updateTelemetry() {
+                // 1. Update Iterations - Safer parsing
+                const iterElem = document.getElementById('telemetry-iterations');
+                if (iterElem && Math.random() > 0.1) { 
+                    currentIter += Math.floor(Math.random() * 5) + 1;
+                    iterElem.innerText = currentIter.toLocaleString();
+                }
+
+                // 2. Fluctuate Physics
+                const reyElem = document.getElementById('telemetry-reynolds');
+                if (reyElem && Math.random() > 0.8) {
+                    let base = 2.4;
+                    let fluctuation = (Math.random() * 0.02 - 0.01);
+                    reyElem.innerText = (base + fluctuation).toFixed(2) + 'e6';
+                }
+
+                const machElem = document.getElementById('telemetry-mach');
+                if (machElem && Math.random() > 0.8) {
+                    let base = 0.35;
+                    let fluctuation = (Math.random() * 0.004 - 0.002);
+                    machElem.innerText = (base + fluctuation).toFixed(3);
+                }
+
+                // 3. Converging Residuals
+                const resElem = document.getElementById('telemetry-residuals');
+                if (resElem && Math.random() > 0.3) {
+                    let exp = Math.floor(Math.random() * 3) + 3; // 3 to 5
+                    let val = (Math.random() * 9).toFixed(2);
+                    resElem.innerText = val + 'e-' + exp;
+                }
+
+                // 4. Animate Graph Bars
+                document.querySelectorAll('.telemetry-bar').forEach(bar => {
+                    if (Math.random() > 0.5) {
+                        const newHeight = Math.floor(Math.random() * 60) + 20; // 20% to 80%
+                        bar.style.height = newHeight + '%';
+                    }
+                });
             }
 
             window.addEventListener('resize', resize);
@@ -584,6 +735,7 @@
             resize();
             initParticles();
             animate();
+            setInterval(updateTelemetry, 100);
 
             // Mobile Menu
             const btn = document.getElementById('mobile-menu-btn');
@@ -594,5 +746,5 @@
         });
     </script>
 </body>
-</html>
+</html>   
  
